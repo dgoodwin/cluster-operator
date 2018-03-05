@@ -37,6 +37,9 @@ import (
 
 	"github.com/openshift/cluster-operator/pkg/ansible"
 	"github.com/openshift/cluster-operator/pkg/kubernetes/pkg/util/metrics"
+	"github.com/openshift/cluster-operator/pkg/logging"
+
+	"github.com/aws/aws-sdk-go/service/elb"
 
 	clusteroperator "github.com/openshift/cluster-operator/pkg/apis/clusteroperator/v1alpha1"
 	clusteroperatorclientset "github.com/openshift/cluster-operator/pkg/client/clientset_generated/clientset"
@@ -362,6 +365,13 @@ func (s *jobSyncStrategy) OnJobCompletion(owner metav1.Object) {
 	}
 	cluster.Status.Provisioned = true
 	cluster.Status.ProvisionedJobGeneration = cluster.Generation
+
+	s.updateELBAnnotation(cluster)
+}
+
+func (s *jobSyncStrategy) updateELBAnnotation(cluster *clusteroperator.Cluster) {
+	cLog := logging.WithCluster(s.controller.logger, cluster)
+	cLog.Infoln("Cluster infra provisioning complete, looking up external master ELB DNS")
 }
 
 func (s *jobSyncStrategy) UpdateOwnerStatus(original, owner metav1.Object) error {

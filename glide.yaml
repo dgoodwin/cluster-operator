@@ -17,3 +17,5 @@ import:
   version: v1.0.3
 - package: github.com/aws/aws-sdk-go
   version: v1.13.8
+- package: github.com/go-ini/ini
+  version: 1.25.4
