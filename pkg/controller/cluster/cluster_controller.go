@@ -38,6 +38,11 @@ import (
 	"k8s.io/client-go/tools/record"
 	"k8s.io/client-go/util/workqueue"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/elb"
+
 	"github.com/golang/glog"
 	log "github.com/sirupsen/logrus"
 
@@ -94,6 +99,7 @@ func NewController(clusterInformer informers.ClusterInformer, machineSetInformer
 		expectations: controller.NewUIDTrackingExpectations(controller.NewExpectations()),
 		queue:        workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), "cluster"),
 		logger:       logger,
+		kubeClient:   kubeClient,
 	}
 
 	clusterInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
@@ -153,7 +159,8 @@ type Controller struct {
 	// Clusters that need to be synced
 	queue workqueue.RateLimitingInterface
 
-	logger log.FieldLogger
+	logger     log.FieldLogger
+	kubeClient kubeclientset.Interface
 }
 
 func (c *Controller) addCluster(obj interface{}) {
@@ -454,6 +461,10 @@ func (c *Controller) syncCluster(key string) error {
 	newStatus, updateStatusErr := c.calculateStatus(clusterLog, cluster, clusterVersion, filteredMachineSets)
 	cluster.Status = newStatus
 
+	if cluster.Status.Provisioned {
+		c.updateELBAnnotation(cluster)
+	}
+
 	if err := controller.PatchClusterStatus(c.client, original, cluster); err != nil {
 		// Multiple things could lead to this update failing. Requeuing the cluster ensures
 		// returning an error causes a requeue without forcing a hotloop
@@ -472,6 +483,50 @@ func (c *Controller) syncCluster(key string) error {
 	} else if manageMachineSetsErr != nil {
 		return manageMachineSetsErr
 	}
+
+	return nil
+}
+
+// updateELBAnnotation will lookup the external master ELB DNS and stamp it onto an attribute on the cluster.
+func (c *Controller) updateELBAnnotation(cluster *clusteroperator.Cluster) error {
+	cLog := colog.WithCluster(c.logger, cluster)
+	cLog.Infoln("Cluster infra provisioning complete, looking up external master ELB DNS")
+	awsCredSecret, err := c.kubeClient.CoreV1().Secrets(cluster.Namespace).Get(
+		cluster.Spec.Hardware.AWS.AccountSecret.Name, metav1.GetOptions{})
+	if err != nil {
+		cLog.Errorf("error looking up AWS credentials secret, giving up: %v", err)
+		return err
+	}
+	// TODO: don't log this permanently
+	keyId := string(awsCredSecret.Data["aws_access_key_id"])
+	secretKey := string(awsCredSecret.Data["aws_secret_access_key"])
+
+	session, err := session.NewSession(&aws.Config{
+		Region: &cluster.Spec.Hardware.AWS.Region,
+		Credentials: credentials.NewStaticCredentials(keyId,
+			secretKey, ""),
+	})
+	if err != nil {
+		cLog.Errorf("error creating AWS session: %v", err)
+		return err
+	}
+	elbSvc := elb.New(session)
+	lbName := fmt.Sprintf("%s-master-external", cluster.Name)
+	lbs, err := elbSvc.DescribeLoadBalancers(&elb.DescribeLoadBalancersInput{
+		LoadBalancerNames: []*string{&lbName},
+	})
+	if err != nil {
+		cLog.Errorf("error looking up ELBs: %v", err)
+		return err
+	}
+	if len(lbs.LoadBalancerDescriptions) != 1 {
+		cLog.Errorf("unexpected number of load balancers found: %d", len(lbs.LoadBalancerDescriptions))
+		return err
+	}
+	lb := lbs.LoadBalancerDescriptions[0]
+	cLog.Infof("found load balancer DNS name: %s", *lb.DNSName)
+	// TODO: move to status somewhere
+	cluster.Annotations["lb-dns-name"] = *lb.DNSName
 
 	return nil
 }
