@@ -150,7 +150,7 @@ objects:
             apiVersion: clusteroperator.openshift.io/v1alpha1
             kind: MachineSetProviderConfigSpec
         roles:
-          - master
+          - Master
 
 
 # TODO: transition these to MachineDeployments once we have the upstream controller running.
