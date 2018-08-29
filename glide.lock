@@ -1,5 +1,5 @@
-hash: 1712058598cc8f0ae49b5ae4bbc8c05faa63679ebc4e66b8b0364030e8628f32
-updated: 2018-07-25T17:28:19.698712279-04:00
+hash: 6288fbf9a238b81c826984e60ddeca0fbde6e9a5f5d92ac1aa70ea2d6cdb33af
+updated: 2018-08-29T15:21:31.371763027-03:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
@@ -8,8 +8,6 @@ imports:
   subpackages:
   - compute/metadata
   - internal
-- name: github.com/asaskevich/govalidator
-  version: f9ffefc3facfbe0caee3fea233cbb6e8208f4541
 - name: github.com/aws/aws-sdk-go
   version: 7f68df2a5baf19398d17def23a514a6e617e5937
   subpackages:
@@ -37,19 +35,20 @@ imports:
   - private/protocol/query
   - private/protocol/query/queryutil
   - private/protocol/rest
+  - private/protocol/restxml
   - private/protocol/xml/xmlutil
   - service/ec2
   - service/ec2/ec2iface
   - service/elb
   - service/elb/elbiface
+  - service/iam
+  - service/iam/iamiface
+  - service/route53
+  - service/route53/route53iface
+  - service/s3
+  - service/s3/s3iface
+  - service/s3/s3manager
   - service/sts
-- name: github.com/Azure/go-autorest
-  version: e14a70c556c8e0db173358d1a903dca345a8e75e
-  subpackages:
-  - autorest
-  - autorest/adal
-  - autorest/azure
-  - autorest/date
 - name: github.com/beorn7/perks
   version: 3ac7bf7a47d159a033b107610db8a1b6575507a4
   subpackages:
@@ -135,8 +134,6 @@ imports:
   version: 782f4967f2dc4564575ca782fe2d04090b5faca8
   subpackages:
   - spew
-- name: github.com/dgrijalva/jwt-go
-  version: 01aeca54ebda6e0fbfafd0a524d234159c05ec20
 - name: github.com/elazarl/go-bindata-assetfs
   version: 3dcc96556217539f50599357fb481ac0dc7439b9
 - name: github.com/emicklei/go-restful
@@ -150,21 +147,19 @@ imports:
 - name: github.com/ghodss/yaml
   version: 73d445a93680fa1a78ae23a5839bad48f32ba1ee
 - name: github.com/go-ini/ini
-  version: d58d458bec3cb5adec4b7ddb41131855eac0b33f
+  version: 300e940a926eb277d3901b20bdfcc54928ad3642
+- name: github.com/go-logr/logr
+  version: 9fb12b3b21c5415d16ac18dc5cd42c1cfdd40c4e
+- name: github.com/go-logr/zapr
+  version: 7536572e8d55209135cd5e7ccf7fce43dca217ab
 - name: github.com/go-openapi/analysis
   version: 8ed83f2ea9f00f945516462951a288eaa68bf0d6
-- name: github.com/go-openapi/errors
-  version: b2b2befaf267d082d779bcef52d682a47c779517
 - name: github.com/go-openapi/jsonpointer
   version: 46af16f9f7b149af66e5d1bd010e3574dc06de98
 - name: github.com/go-openapi/jsonreference
   version: 13c6e3589ad90f49bd3e3bbe2c2cb3d7a4142272
-- name: github.com/go-openapi/loads
-  version: 2a2b323bab96e6b1fdee110e57d959322446e9c9
 - name: github.com/go-openapi/spec
   version: 7abd5745472fff5eb3685386d5fb8bf38683154d
-- name: github.com/go-openapi/strfmt
-  version: 913ee058e387ac83a67e2d9f13acecdcd5769fc6
 - name: github.com/go-openapi/swag
   version: f3f9494671f93fcff853e3c6e9e948b3eb71e590
 - name: github.com/gogo/protobuf
@@ -173,13 +168,13 @@ imports:
   - proto
   - sortkeys
 - name: github.com/golang/glog
-  version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
+  version: 44145f04b68cf362d9c4df2182967c2275eaefed
 - name: github.com/golang/groupcache
   version: 02826c3e79038b59d737d3b1c0a1d937f71a4433
   subpackages:
   - lru
 - name: github.com/golang/mock
-  version: 22bbf0ddf08105dfa364d0a2fa619dfa71014af5
+  version: 600781dde9cca80734169b9e969d9054ccc57937
   subpackages:
   - gomock
 - name: github.com/golang/protobuf
@@ -202,19 +197,10 @@ imports:
   - OpenAPIv2
   - compiler
   - extensions
-- name: github.com/gophercloud/gophercloud
-  version: 8183543f90d1aef267a5ecc209f2e0715b355acb
-  subpackages:
-  - openstack
-  - openstack/identity/v2/tenants
-  - openstack/identity/v2/tokens
-  - openstack/identity/v3/tokens
-  - openstack/utils
-  - pagination
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
-  version: cb4698366aa625048f3b815af6a0dea8aef9280a
+  version: e48e440e4c92e3251d812f8ce7858944dfa3331c
 - name: github.com/gregjones/httpcache
   version: 787624de3eb7bd915c329cba748687a3b22666a6
   subpackages:
@@ -256,7 +242,7 @@ imports:
   - pkg/controller
   - pkg/validators
 - name: github.com/kubernetes/repo-infra
-  version: 6a161d975821e4204dffde89f86065edeb7b6db3
+  version: 84d52408a061e87d45aebf5a0867246bdf66d180
 - name: github.com/mailru/easyjson
   version: 2f5df55504ebc322e4d52d34df6a1f5b503bf26d
   subpackages:
@@ -267,16 +253,50 @@ imports:
   version: fc2b8d3a73c4867e51861bbdd5ae3c1f0869dd6a
   subpackages:
   - pbutil
-- name: github.com/mitchellh/mapstructure
-  version: f15292f7a699fcc1a38a80977f80a046874ba8ac
 - name: github.com/mxk/go-flowrate
   version: cca7078d478f8520f85629ad7c68962d31ed7682
   subpackages:
   - flowrate
 - name: github.com/NYTimes/gziphandler
   version: 56545f4a5d46df9a6648819d1664c3a03a13ffdb
+- name: github.com/onsi/ginkgo
+  version: 11459a886d9cd66b319dac7ef1e917ee221372c9
+  subpackages:
+  - config
+  - internal/codelocation
+  - internal/containernode
+  - internal/failer
+  - internal/leafnodes
+  - internal/remote
+  - internal/spec
+  - internal/spec_iterator
+  - internal/specrunner
+  - internal/suite
+  - internal/testingtproxy
+  - internal/writer
+  - reporters
+  - reporters/stenographer
+  - reporters/stenographer/support/go-colorable
+  - reporters/stenographer/support/go-isatty
+  - types
+- name: github.com/onsi/gomega
+  version: dcabb60a477c2b6f456df65037cb6708210fbb02
+  subpackages:
+  - format
+  - gbytes
+  - gexec
+  - internal/assertion
+  - internal/asyncassertion
+  - internal/oraclematcher
+  - internal/testingtsupport
+  - matchers
+  - matchers/support/goraph/bipartitegraph
+  - matchers/support/goraph/edge
+  - matchers/support/goraph/node
+  - matchers/support/goraph/util
+  - types
 - name: github.com/openshift/api
-  version: fc4c02c9169b85b9a80353f11ac15ce542a0944a
+  version: bccfa651752a8a9f963b9899b477dcffbe9be786
   subpackages:
   - apps/v1
 - name: github.com/openshift/client-go
@@ -333,6 +353,18 @@ imports:
   - codec
 - name: github.com/xiang90/probing
   version: 07dd2e8dfe18522e9c447ba95f2fe95262f63bb2
+- name: go.uber.org/atomic
+  version: 1ea20fb1cbb1cc08cbd0d913a96dead89aa18289
+- name: go.uber.org/multierr
+  version: 3c4937480c32f4c13a875a1829af76c98ca3d40a
+- name: go.uber.org/zap
+  version: 67bc79d13d155c02fd008f721863ff8cc5f30659
+  subpackages:
+  - buffer
+  - internal/bufferpool
+  - internal/color
+  - internal/exit
+  - zapcore
 - name: golang.org/x/crypto
   version: 81e90905daefcd6fd217b62423c0908922eadb30
   subpackages:
@@ -346,6 +378,7 @@ imports:
   - context/ctxhttp
   - html
   - html/atom
+  - html/charset
   - http2
   - http2/hpack
   - idna
@@ -369,8 +402,19 @@ imports:
   version: b19bf474d317b857955b12035d2c5acb57ce8b01
   subpackages:
   - cases
+  - encoding
+  - encoding/charmap
+  - encoding/htmlindex
+  - encoding/internal
+  - encoding/internal/identifier
+  - encoding/japanese
+  - encoding/korean
+  - encoding/simplifiedchinese
+  - encoding/traditionalchinese
+  - encoding/unicode
   - internal
   - internal/tag
+  - internal/utf8internal
   - language
   - runes
   - secure/bidirule
@@ -384,7 +428,7 @@ imports:
   subpackages:
   - rate
 - name: google.golang.org/appengine
-  version: b1f26356af11148e710935ed1ac8a7f5702c7612
+  version: 03cac3b07182cfb08c0d0c0b6ee72a1ceb151c92
   subpackages:
   - internal
   - internal/app_identity
@@ -417,11 +461,6 @@ imports:
   - transport
 - name: gopkg.in/inf.v0
   version: 3887ee99ecf07df5b447e9b00d9c0b2adaa9f3e4
-- name: gopkg.in/mgo.v2
-  version: 9856a29383ce1c59f308dd1cf0363a79b5bef6b5
-  subpackages:
-  - bson
-  - internal/json
 - name: gopkg.in/natefinch/lumberjack.v2
   version: 20b71e5b60d756d3d2f80def009790325acc2b23
 - name: gopkg.in/yaml.v2
@@ -458,6 +497,14 @@ imports:
   - storage/v1
   - storage/v1alpha1
   - storage/v1beta1
+- name: k8s.io/apiextensions-apiserver
+  version: 9eba445d72bbc1953ec6269ce0a1fda185dd3636
+  subpackages:
+  - pkg/apis/apiextensions
+  - pkg/apis/apiextensions/v1beta1
+  - pkg/client/clientset/clientset
+  - pkg/client/clientset/clientset/scheme
+  - pkg/client/clientset/clientset/typed/apiextensions/v1beta1
 - name: k8s.io/apimachinery
   version: 180eddb345a5be3a157cea1c624700ad5bd27b8f
   subpackages:
@@ -614,6 +661,7 @@ imports:
   subpackages:
   - discovery
   - discovery/fake
+  - dynamic
   - informers
   - informers/admissionregistration
   - informers/admissionregistration/v1alpha1
@@ -738,11 +786,7 @@ imports:
   - listers/storage/v1alpha1
   - listers/storage/v1beta1
   - pkg/version
-  - plugin/pkg/client/auth
-  - plugin/pkg/client/auth/azure
   - plugin/pkg/client/auth/gcp
-  - plugin/pkg/client/auth/oidc
-  - plugin/pkg/client/auth/openstack
   - rest
   - rest/watch
   - testing
@@ -781,12 +825,11 @@ imports:
   - pkg/util
   - pkg/util/proto
 - name: sigs.k8s.io/cluster-api
-  version: 0980af3dad42d3d1c4e2e605a7b96560331e8c12
+  version: 211cb357ea5f6d249857b3bd1d6dc0acd86df364
   subpackages:
   - pkg/apis
   - pkg/apis/cluster
   - pkg/apis/cluster/common
-  - pkg/apis/cluster/install
   - pkg/apis/cluster/v1alpha1
   - pkg/client/clientset_generated/clientset
   - pkg/client/clientset_generated/clientset/fake
@@ -808,4 +851,37 @@ imports:
   - pkg/controller/sharedinformers
   - pkg/openapi
   - pkg/util
+- name: sigs.k8s.io/controller-runtime
+  version: 99d63be90650021d6f22917779f9d5ee3b11b913
+  subpackages:
+  - pkg/cache
+  - pkg/cache/internal
+  - pkg/client
+  - pkg/client/apiutil
+  - pkg/client/config
+  - pkg/controller
+  - pkg/controller/controllerutil
+  - pkg/envtest
+  - pkg/envtest/printer
+  - pkg/event
+  - pkg/handler
+  - pkg/internal/controller
+  - pkg/internal/recorder
+  - pkg/manager
+  - pkg/predicate
+  - pkg/reconcile
+  - pkg/recorder
+  - pkg/runtime/inject
+  - pkg/runtime/log
+  - pkg/runtime/scheme
+  - pkg/runtime/signals
+  - pkg/source
+  - pkg/source/internal
+- name: sigs.k8s.io/controller-tools
+  version: a92b5ff3ebb5767eb3d8344bd097a95863e52c3f
+- name: sigs.k8s.io/testing_frameworks
+  version: 5818a3a284a11812aaed11d5ca0bcadec2c50e83
+  subpackages:
+  - integration
+  - integration/internal
 testImports: []

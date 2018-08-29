@@ -10,6 +10,8 @@ import:
   version: kubernetes-1.9.0
 - package: k8s.io/code-generator
   version: kubernetes-1.9.0
+- package: sigs.k8s.io/controller-tools
+  version: v0.1.2
 - package: k8s.io/gengo
   version: b58fc7edb82e0c6ffc9b8aef61813c7261b785d4
 - package: github.com/kubernetes/repo-infra
