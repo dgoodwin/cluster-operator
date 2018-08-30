@@ -1,5 +1,5 @@
-hash: 6288fbf9a238b81c826984e60ddeca0fbde6e9a5f5d92ac1aa70ea2d6cdb33af
-updated: 2018-08-29T15:21:31.371763027-03:00
+hash: 8ef3c56e5bd78e279f120f8093425f53a4da7bb64b94085821463e4a20dbd301
+updated: 2018-08-30T09:16:45.89314302-03:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
@@ -162,6 +162,8 @@ imports:
   version: 7abd5745472fff5eb3685386d5fb8bf38683154d
 - name: github.com/go-openapi/swag
   version: f3f9494671f93fcff853e3c6e9e948b3eb71e590
+- name: github.com/gobuffalo/envy
+  version: 3c96536452167a705ca5a70b831d3810e1e10452
 - name: github.com/gogo/protobuf
   version: c0656edd0d9eab7c66d1eb0c568f9039345796f7
   subpackages:
@@ -225,6 +227,8 @@ imports:
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/jmespath/go-jmespath
   version: c2b33e8439af944379acbdd9c3a5fe0bc44bd8a5
+- name: github.com/joho/godotenv
+  version: a79fa1e548e2c689c241d10173efd51e5d689d5b
 - name: github.com/jonboulle/clockwork
   version: 72f9bd7c4e0c2a40055ab3d0f09654f730cce982
 - name: github.com/json-iterator/go
@@ -249,6 +253,8 @@ imports:
   - buffer
   - jlexer
   - jwriter
+- name: github.com/markbates/inflect
+  version: dd7de90c06bca70f18136e59dec2270c19a401e7
 - name: github.com/matttproud/golang_protobuf_extensions
   version: fc2b8d3a73c4867e51861bbdd5ae3c1f0869dd6a
   subpackages:
@@ -309,6 +315,8 @@ imports:
   version: ca53cad383cad2479bbba7f7a1a05797ec1386e4
 - name: github.com/peterbourgon/diskv
   version: 5f041e8faa004a95c88a202771f4cc3e991971e6
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/pmezard/go-difflib
   version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
   subpackages:
@@ -339,6 +347,8 @@ imports:
   version: f006c2ac4710855cf0f916dd6b77acf6b048dc6e
   subpackages:
   - hooks/test
+- name: github.com/spf13/afero
+  version: 787d034dfe70e44075ccc060d346146ef53270ad
 - name: github.com/spf13/cobra
   version: a1f051bc3eba734da4772d60e2d677f47cf93ef4
 - name: github.com/spf13/pflag
@@ -852,7 +862,7 @@ imports:
   - pkg/openapi
   - pkg/util
 - name: sigs.k8s.io/controller-runtime
-  version: 99d63be90650021d6f22917779f9d5ee3b11b913
+  version: 3db8d34cc4511e076bf1847eca32d7fa8981d4c7
   subpackages:
   - pkg/cache
   - pkg/cache/internal

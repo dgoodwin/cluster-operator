@@ -111,7 +111,7 @@ build: .init .generate_files \
 	$(BINDIR)/cluster-operator \
 	$(BINDIR)/fake-openshift-ansible \
 	$(BINDIR)/fake-machine-controller \
-	$(BINDIR)/coutil 
+	$(BINDIR)/coutil
 
 .PHONY: $(BINDIR)/cluster-operator
 cluster-operator: $(BINDIR)/cluster-operator
@@ -426,3 +426,7 @@ release-push: $(addprefix release-push-,$(ALL_ARCH))
 release-push-%:
 	$(MAKE) ARCH=$* build
 	$(MAKE) ARCH=$* push
+
+# Generate manifests e.g. CRD, RBAC etc.
+manifests:
+	go run vendor/sigs.k8s.io/controller-tools/cmd/controller-gen/main.go all

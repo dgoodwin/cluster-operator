@@ -31,3 +31,13 @@ import:
 - package: github.com/openshift/client-go
 - package: github.com/go-openapi/analysis
   version: 8ed83f2ea9f00f945516462951a288eaa68bf0d6
+- package: github.com/markbates/inflect
+  version: v1.0.0
+- package: github.com/pkg/errors
+  version: v0.8.0
+- package: github.com/spf13/afero
+  version: v1.1.1
+- package: github.com/gobuffalo/envy
+  version: v1.6.4
+- package: github.com/joho/godotenv
+  version: v1.2.0
