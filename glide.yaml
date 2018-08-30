@@ -10,8 +10,6 @@ import:
   version: kubernetes-1.9.0
 - package: k8s.io/code-generator
   version: kubernetes-1.9.0
-- package: sigs.k8s.io/controller-tools
-  version: v0.1.2
 - package: k8s.io/gengo
   version: b58fc7edb82e0c6ffc9b8aef61813c7261b785d4
 - package: github.com/kubernetes/repo-infra
@@ -31,6 +29,8 @@ import:
 - package: github.com/openshift/client-go
 - package: github.com/go-openapi/analysis
   version: 8ed83f2ea9f00f945516462951a288eaa68bf0d6
+- package: sigs.k8s.io/controller-tools
+  version: v0.1.2
 - package: github.com/markbates/inflect
   version: v1.0.0
 - package: github.com/pkg/errors
@@ -41,3 +41,5 @@ import:
   version: v1.6.4
 - package: github.com/joho/godotenv
   version: v1.2.0
+- package: k8s.io/apiextensions-apiserver
+  version: release-1.9

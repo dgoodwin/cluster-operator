@@ -1,5 +1,5 @@
-hash: 8ef3c56e5bd78e279f120f8093425f53a4da7bb64b94085821463e4a20dbd301
-updated: 2018-08-30T09:16:45.89314302-03:00
+hash: 3ab42285185fe6b9fee7c922da0d6e2c200b16333c90925168bca9e2a2c5925f
+updated: 2018-08-30T09:30:34.355325117-03:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
@@ -508,7 +508,7 @@ imports:
   - storage/v1alpha1
   - storage/v1beta1
 - name: k8s.io/apiextensions-apiserver
-  version: 9eba445d72bbc1953ec6269ce0a1fda185dd3636
+  version: 7e9f478f435dad2133a8b41431f4ac67c85f7ddf
   subpackages:
   - pkg/apis/apiextensions
   - pkg/apis/apiextensions/v1beta1
