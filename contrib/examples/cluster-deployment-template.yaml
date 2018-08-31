@@ -83,7 +83,7 @@ objects:
     ssh-privatekey: ${SSH_PRIVATE_KEY}
     ssh-publickey: ${SSH_PUBLIC_KEY}
 
-- apiVersion: clusteroperator.openshift.io/v1alpha1
+- apiVersion: clusteroperator.clusteroperator2.openshift.io/v1alpha1
   kind: ClusterDeployment
   metadata:
     name: ${CLUSTER_NAME}

@@ -1,0 +1,145 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    controller-tools.k8s.io: "1.0"
+  name: clusterdeployments.clusteroperator.clusteroperator2.openshift.io
+spec:
+  group: clusteroperator.clusteroperator2.openshift.io
+  names:
+    kind: ClusterDeployment
+    plural: clusterdeployments
+  scope: Namespaced
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            clusterName:
+              type: string
+            clusterVersionRef:
+              properties:
+                name:
+                  type: string
+                namespace:
+                  type: string
+              type: object
+            config:
+              properties:
+                sdnPluginName:
+                  type: string
+              type: object
+            defaultHardwareSpec:
+              properties:
+                aws:
+                  properties:
+                    instanceType:
+                      type: string
+                  type: object
+              type: object
+            hardware:
+              properties:
+                aws:
+                  properties:
+                    accountSecret:
+                      type: object
+                    defaults:
+                      properties:
+                        instanceType:
+                          type: string
+                      type: object
+                    keyPairName:
+                      type: string
+                    region:
+                      type: string
+                    sshSecret:
+                      type: object
+                    sshUser:
+                      type: string
+                    sslSecret:
+                      type: object
+                    vpcName:
+                      type: string
+                    vpcSubnet:
+                      type: string
+                  type: object
+              type: object
+            machineSets:
+              items:
+                properties:
+                  hardware:
+                    properties:
+                      aws:
+                        properties:
+                          instanceType:
+                            type: string
+                        type: object
+                    type: object
+                  infra:
+                    type: boolean
+                  nodeLabels:
+                    type: object
+                  nodeTaints:
+                    items:
+                      type: object
+                    type: array
+                  nodeType:
+                    type: string
+                  shortName:
+                    type: string
+                  size:
+                    format: int64
+                    type: integer
+                type: object
+              type: array
+            networkConfig:
+              properties:
+                pods:
+                  properties:
+                    cidrBlocks:
+                      items:
+                        type: string
+                      type: array
+                  type: object
+                serviceDomain:
+                  type: string
+                services:
+                  properties:
+                    cidrBlocks:
+                      items:
+                        type: string
+                      type: array
+                  type: object
+              type: object
+          type: object
+        status:
+          properties:
+            conditions:
+              items:
+                properties:
+                  lastProbeTime:
+                    format: date-time
+                    type: string
+                  lastTransitionTime:
+                    format: date-time
+                    type: string
+                  message:
+                    type: string
+                  reason:
+                    type: string
+                  status:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              type: array
+          type: object
+      type: object
+  version: v1alpha1

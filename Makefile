@@ -429,4 +429,7 @@ release-push-%:
 
 # Generate manifests e.g. CRD, RBAC etc.
 manifests:
-	go run vendor/sigs.k8s.io/controller-tools/cmd/controller-gen/main.go all
+	# Uncomment to go back to RBAC
+	#go run vendor/sigs.k8s.io/controller-tools/cmd/controller-gen/main.go all
+	# Using different domain to test CRD usage.
+	go run vendor/sigs.k8s.io/controller-tools/cmd/controller-gen/main.go crd --domain clusteroperator2.openshift.io

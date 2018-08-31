@@ -62,9 +62,9 @@
 
   # Command will error if it does not exist. Technically this is fine, you can create the cluster
   # and wait for the version to exist, but in this case it probably signifies a mistake by the user.
-  - name: verify cluster version exists
-    command: "oc get clusterversion {{ cluster_version }} -n {{ cluster_version_namespace }}"
-    changed_when: false
+  #- name: verify cluster version exists
+    #command: "oc get clusterversion {{ cluster_version }} -n {{ cluster_version_namespace }}"
+    #changed_when: false
 
   - name: create cluster namespace
     kubectl_apply:
