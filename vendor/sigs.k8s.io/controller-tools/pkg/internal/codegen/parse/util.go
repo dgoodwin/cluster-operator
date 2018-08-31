@@ -199,6 +199,14 @@ func GetVersion(t *types.Type, group string) string {
 	return filepath.Base(t.Name.Package)
 }
 
+// GetVersion returns version of t or an error.
+func GetVersionErr(t *types.Type, group string) (string, error) {
+	if !IsVersioned(t, group) {
+		return "", errors.Errorf("Cannot get version for unversioned type %v", t.Name)
+	}
+	return filepath.Base(t.Name.Package), nil
+}
+
 // GetGroup returns group of t.
 func GetGroup(t *types.Type) string {
 	return filepath.Base(GetGroupPackage(t))

@@ -65,7 +65,11 @@ func (b *APIs) parseIndex() {
 			NonNamespaced: IsNonNamespaced(c),
 		}
 		r.Group = GetGroup(c)
-		r.Version = GetVersion(c, r.Group)
+		var err error
+		r.Version, err = GetVersionErr(c, r.Group)
+		if err != nil {
+			continue
+		}
 		r.Kind = GetKind(c, r.Group)
 		r.Domain = b.Domain
 
