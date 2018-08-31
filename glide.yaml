@@ -42,4 +42,4 @@ import:
 - package: github.com/joho/godotenv
   version: v1.2.0
 - package: k8s.io/apiextensions-apiserver
-  version: release-1.9
+  version: kubernetes-1.10.1

@@ -1,5 +1,5 @@
-hash: 3ab42285185fe6b9fee7c922da0d6e2c200b16333c90925168bca9e2a2c5925f
-updated: 2018-08-30T09:30:34.355325117-03:00
+hash: 79bc59b84d164c93431f3333c16cc97e986cd5b4159738199c354fe79c1137bd
+updated: 2018-08-31T10:24:53.347191088-03:00
 imports:
 - name: bitbucket.org/ww/goautoneg
   version: 75cd24fc2f2c2a2088577d12123ddee5f54e0675
@@ -202,7 +202,7 @@ imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
-  version: e48e440e4c92e3251d812f8ce7858944dfa3331c
+  version: 962c5bed0721b50f2ba42684e9600dfde174770f
 - name: github.com/gregjones/httpcache
   version: 787624de3eb7bd915c329cba748687a3b22666a6
   subpackages:
@@ -302,11 +302,11 @@ imports:
   - matchers/support/goraph/util
   - types
 - name: github.com/openshift/api
-  version: bccfa651752a8a9f963b9899b477dcffbe9be786
+  version: 5ad8479f64f1b60ee9c62ce8ef1fe6638838725e
   subpackages:
   - apps/v1
 - name: github.com/openshift/client-go
-  version: 5b198a036f098f34fbf0c42768382d80708cd2a9
+  version: 431ec9a26e5021f35fa41ee9a89842db9bfdb370
   subpackages:
   - apps/clientset/versioned
   - apps/clientset/versioned/scheme
@@ -508,7 +508,7 @@ imports:
   - storage/v1alpha1
   - storage/v1beta1
 - name: k8s.io/apiextensions-apiserver
-  version: 7e9f478f435dad2133a8b41431f4ac67c85f7ddf
+  version: 4347b330d0ff094db860f2f75fa725b4f4b53618
   subpackages:
   - pkg/apis/apiextensions
   - pkg/apis/apiextensions/v1beta1
